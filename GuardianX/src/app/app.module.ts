@@ -8,24 +8,30 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { SuperadminComponent } from './components/superadmin/superadmin.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { AccessDeniedComponent } from './components/errors/access-denied/access-denied.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HomeComponent } from './components/home/home.component';
+import { FormsModule } from '@angular/forms';
+import { LoginComponent } from './components/login/login.component';
+import { HttpInterceptor } from './helpers/http/http.interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
+    LoginComponent,
     RegisterComponent,
     NavbarComponent,
     SuperadminComponent,
     AdminComponent,
-    AccessDeniedComponent
+    AccessDeniedComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     HttpClientModule,
   ],
-  providers: [
-  ],
+  providers: [{provide : HTTP_INTERCEPTORS, useClass : HttpInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
