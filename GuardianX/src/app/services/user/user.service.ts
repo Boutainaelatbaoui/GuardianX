@@ -12,7 +12,7 @@ export class UserService {
 
 
   getUserContent() {
-  return  this.http.request('get',`${this.apiUrl}/manager/user`, {
+  return  this.http.request('get',`${this.apiUrl}/manager/user-admin`, {
       withCredentials: true,
       responseType : "text"
     })
