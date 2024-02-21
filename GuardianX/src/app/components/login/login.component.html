@@ -1,52 +1,74 @@
-<div class="container mt-5">
-    <div class="row justify-content-center">
-      <div class="col-md-6">
-        <div class="card">
-          <div class="card-body">
-            <h4 class="card-title">Login</h4>
-            <div class="alert alert-danger" *ngIf="errorMessage">
-              <p>{{errorMessage}}</p>
-            </div>
-            <form #formLogin="ngForm" (ngSubmit)="onSubmitLogin(formLogin)">
-              <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input
-                  type="email"
-                  class="form-control"
-                  id="email"
-                  placeholder="Email Address"
-                  ngModel
-                  #email="ngModel"
-                  name="email"
-                  required
-                  email>
-                <div *ngIf="email.errors && formLogin.submitted" class="text-danger">
-                  Email is required!
-                </div>
-              </div>
-              <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input
-                  type="password"
-                  class="form-control"
-                  id="password"
-                  placeholder="Password"
-                  ngModel
-                  #password="ngModel"
-                  name="password"
-                  required
-                  minlength="6">
-                  <div *ngIf="password.errors && formLogin.submitted" class="text-danger">
-                    <div *ngIf="password.errors['required']">Password is required</div>
-                    <div *ngIf="password.errors['minlength']" >
-                      Password must be at least 6 characters
+<app-navbar></app-navbar>
+<main class="py-5">
+<div class="vh-100">
+    <div class="container container-log h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col">
+        <div class="card-form mb-3 m-auto">
+            <div class="row">
+            <div class="col second-card">
+                <div class="mx-5">
+                <div class="text-center mb-5">
+                    <div class="mt-5">
+                    <h4 class="login-text">Welcome Back
+                    </h4>
                     </div>
-                  </div>
-              </div>
-              <button  type="submit" class="btn btn-primary">Login</button>
-            </form>
-          </div>
+                    <div>
+                    <h5 class="login-detail">Please Enter Your Details</h5>
+                    </div>
+                </div>
+                <form #formLogin="ngForm" (ngSubmit)="onSubmitLogin(formLogin)">
+                    <div class="mb-3">
+                    <label for="email" class="form-label">Email address</label>
+                    <div class="">
+                        <input type="email" class="form-control" id="email" placeholder="Email Address" ngModel #email="ngModel" name="email" required email>
+                        <div *ngIf="email.errors && formLogin.submitted" class="text-danger">
+                            Email is required!
+                        </div>
+                    </div>
+                    </div>
+                    <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <div class="">
+                        <input type="password" class="form-control" id="password" placeholder="Password" ngModel #password="ngModel" name="password"
+                        required minlength="6">
+                        <div *ngIf="password.errors && formLogin.submitted" class="text-danger">
+                            <div *ngIf="password.errors['required']">Password is required</div>
+                            <div *ngIf="password.errors['minlength']" >
+                                Password must be at least 6 characters
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="mb-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="remember" id="remember">
+
+                        <label class="form-check-label text-form" for="remember">
+                        Remember Me
+                        </label>
+                    </div>
+                    </div>
+                    <div class="text-start mb-3">
+                    <a class="text-decoration-none text-form" href="">
+                        Forgot Your Password?
+                    </a>
+                    </div>
+                    <div class="d-grid d-block mb-4">
+                    <button type="submit" name="login" class="btn main-btn text-white" id="login">Sign in</button>
+                    </div>
+                </form>
+                <p class="mb-3 text-center text-form fs-6 mb-3">Don't have an account? <button class="btn main-btn btn-sm">
+                    <a routerLink="/register" class="text-decoration-none text-white text-center">Sign Up</a></button></p>
+                </div>
+            </div>
+            <div class="col d-none d-lg-block">
+                <img [src]="imageSection3"  class="img-fluid img-form" id="img" alt="hunt" min-height="200px">
+            </div>
+            </div>
         </div>
-      </div>
+        </div>
     </div>
-  </div>
+    </div>
+</div>
+</main>

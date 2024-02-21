@@ -1,7 +1,9 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import {Subscription} from "rxjs";
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { StorageService } from 'src/app/services/storage/storage.service';
 import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
@@ -9,31 +11,22 @@ import { UserService } from 'src/app/services/user/user.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnInit {
 
   content : string = '';
-  user! : User;
-  AuthUserSub! : Subscription;
+  user : User | null = null;
   constructor(
     private userService : UserService,
-    private authService : AuthService
-  ) {
-  }
+    private activatedRoute: ActivatedRoute,
+    private storageService: StorageService
+  ) {}
   ngOnInit(): void {
-    this.AuthUserSub = this.authService.AuthenticatedUser$.subscribe({
-      next : user => {
-        if(user) this.user = user;
-      }
-    })
+    this.user = this.storageService.getSavedUser();
+    // this.userService.getUserContent().subscribe({
+    //   next: data => this.content = data,
+    //   error: err => console.error(err)
+    // });
 
-    this.userService.getUserContent().subscribe({
-      next : data => {
-        this.content = data;
-      },
-      error : err => console.log(err)
-    })
-  }
-  ngOnDestroy() {
-    this.AuthUserSub.unsubscribe();
+    this.content = this.activatedRoute.snapshot.data['content'];
   }
 }

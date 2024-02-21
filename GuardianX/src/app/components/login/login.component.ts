@@ -1,7 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
@@ -9,22 +8,11 @@ import { AuthService } from 'src/app/services/auth/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit,OnDestroy {
-
+export class LoginComponent {
+  imageSection3: string = 'assets/img/Hunt4.jpg';
   errorMessage! : string;
-  AuthUserSub! : Subscription;
 
-  constructor(private authService : AuthService, private router : Router) {
-  }
-
-  ngOnInit() {
-    this.AuthUserSub = this.authService.AuthenticatedUser$.subscribe({
-      next : user => {
-        if(user) {
-          this.router.navigate(['home']);
-        }
-      }
-    })
+  constructor(private authService : AuthService,  private router : Router) {
   }
 
   onSubmitLogin(formLogin: NgForm) {
@@ -42,10 +30,6 @@ export class LoginComponent implements OnInit,OnDestroy {
         this.errorMessage = err;
         console.log(err);
       }
-
     })
-  }
-  ngOnDestroy() {
-    this.AuthUserSub.unsubscribe();
   }
 }

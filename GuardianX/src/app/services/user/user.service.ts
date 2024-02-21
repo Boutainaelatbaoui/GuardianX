@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import { environment } from 'src/environments/environment';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,13 +14,12 @@ export class UserService {
 
   getUserContent() {
   return  this.http.request('get',`${this.apiUrl}/manager/user-admin`, {
-      withCredentials: true,
       responseType : "text"
     })
   }
 
   getAdminContent() {
-    return  this.http.request('get',`${this.apiUrl}/manager/admin`, {
+    return  this.http.request('get',`${this.apiUrl}/manager`, {
       withCredentials: true,
       responseType : "text"
     })
